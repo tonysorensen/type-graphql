@@ -9,10 +9,12 @@ import { RegisterResolver } from "./modules/user/Register";
 const main = async () => {
   await createConnection();
 
+  const schema = await buildSchema({
+    resolvers: [RegisterResolver],
+  });
+
   const apolloServer = new ApolloServer({
-    schema: await buildSchema({
-      resolvers: [RegisterResolver],
-    }),
+    schema,
   });
 
   const app = Express();
